@@ -444,3 +444,116 @@ setInterval(nextTip, 5000);
 document.addEventListener('DOMContentLoaded', () => {
     showTip(0);
 });
+
+// Interactive Console functionality
+const consoleInput = document.getElementById('console-input');
+let consoleHistory = [];
+let historyIndex = -1;
+
+function handleConsoleInput(event) {
+    if (event.key === 'Enter') {
+        const code = consoleInput.value.trim();
+        if (code) {
+            executeConsoleCode(code);
+            consoleHistory.push(code);
+            historyIndex = consoleHistory.length;
+            consoleInput.value = '';
+        }
+    } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        if (historyIndex > 0) {
+            historyIndex--;
+            consoleInput.value = consoleHistory[historyIndex];
+        }
+    } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        if (historyIndex < consoleHistory.length - 1) {
+            historyIndex++;
+            consoleInput.value = consoleHistory[historyIndex];
+        } else {
+            historyIndex = consoleHistory.length;
+            consoleInput.value = '';
+        }
+    }
+}
+
+function executeConsoleCode(code) {
+    // Create history item for input
+    const historyItem = document.createElement('div');
+    historyItem.className = 'console-history-item';
+
+    const prompt = document.createElement('span');
+    prompt.className = 'console-history-prompt';
+    prompt.textContent = '>';
+
+    const codeSpan = document.createElement('span');
+    codeSpan.className = 'console-history-code';
+    codeSpan.textContent = code;
+
+    historyItem.appendChild(prompt);
+    historyItem.appendChild(codeSpan);
+    consoleContent.appendChild(historyItem);
+
+    try {
+        // Create a safe context with access to the current iframe's window
+        const iframe = document.getElementById('output-frame');
+        const context = iframe.contentWindow;
+
+        // Add console methods to context
+        const customConsole = {
+            log: (...args) => {
+                const result = document.createElement('div');
+                result.className = 'console-history-result';
+                result.textContent = args.join(' ');
+                consoleContent.appendChild(result);
+            },
+            error: (...args) => {
+                const result = document.createElement('div');
+                result.className = 'console-error';
+                result.textContent = args.join(' ');
+                consoleContent.appendChild(result);
+            },
+            info: (...args) => {
+                const result = document.createElement('div');
+                result.className = 'console-info';
+                result.textContent = args.join(' ');
+                consoleContent.appendChild(result);
+            },
+            warn: (...args) => {
+                const result = document.createElement('div');
+                result.className = 'console-warning';
+                result.textContent = args.join(' ');
+                consoleContent.appendChild(result);
+            }
+        };
+
+        // Create function with console and window context
+        const func = new Function('console', 'window', 'document', `
+            try {
+                const result = eval(${JSON.stringify(code)});
+                if (result !== undefined) {
+                    console.log(result);
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        `);
+
+        // Execute the code with the iframe's context
+        func(customConsole, context, context.document);
+    } catch (error) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'console-error';
+        errorDiv.textContent = error.message;
+        consoleContent.appendChild(errorDiv);
+    }
+
+    // Scroll to bottom
+    consoleContent.scrollTop = consoleContent.scrollHeight;
+}
+
+// Show console by default when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    consoleOutput.classList.add('show');
+    consoleInput.addEventListener('keydown', handleConsoleInput);
+});

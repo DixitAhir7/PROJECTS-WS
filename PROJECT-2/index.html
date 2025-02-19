@@ -149,6 +149,11 @@
                                 Console <button onclick="clearConsole()"><i class="fas fa-trash"></i></button>
                             </div>
                             <div id="console-content"></div>
+                            <div class="console-input-container">
+                                <span class="console-prompt">></span>
+                                <input type="text" id="console-input" placeholder="Type JavaScript code here..."
+                                    onkeydown="handleConsoleInput(event)">
+                            </div>
                         </div>
                     </div>
                 </div>

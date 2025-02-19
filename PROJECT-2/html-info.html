@@ -8,6 +8,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-code"></i> CodeHub</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Products <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-book"></i> Documentation</a>
+                    <a href="#"><i class="fas fa-graduation-cap"></i> Tutorials</a>
+                    <div class="nested-dropdown">
+                        <a href="#" class="nested-dropbtn">Languages <i class="fas fa-chevron-right"></i></a>
+                        <div class="nested-dropdown-content">
+                            <a href="html-info.html"><i class="fab fa-html5"></i> HTML</a>
+                            <a href="css-info.html"><i class="fab fa-css3-alt"></i> CSS</a>
+                            <a href="#"><i class="fab fa-js"></i> JavaScript</a>
+                            <a href="#"><i class="fab fa-python"></i> Python</a>
+                            <a href="#"><i class="fas fa-code"></i> C++</a>
+                            <a href="#"><i class="fas fa-code"></i> C</a>
+                            <a href="#"><i class="fas fa-code"></i> C#</a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-users"></i> Community</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Support</a>
+                </div>
+            </li>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+
     <div class="info-container">
         <h1><i class="fab fa-html5"></i> HTML Information</h1>
         <div class="info-content">
@@ -41,5 +71,6 @@
         </div>
         <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
