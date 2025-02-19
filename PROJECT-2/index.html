@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Navbar with Nested Dropdowns</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#"><i class="fas fa-code"></i> CodeHub</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Products <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <div class="nested-dropdown">
+                        <a href="#" class="nested-dropbtn">Languages <i class="fas fa-chevron-right"></i></a>
+                        <div class="nested-dropdown-content">
+                            <a href="html-info.html" target="_blank"><i class="fab fa-html5"></i> HTML</a>
+                            <a href="css-info.html" target="_blank"><i class="fab fa-css3-alt"></i> CSS</a>
+                            <a href="#"><i class="fab fa-js"></i> JavaScript</a>
+                            <a href="#"><i class="fab fa-python"></i> Python</a>
+                            <a href="#"><i class="fas fa-code"></i> C++</a>
+                            <a href="#"><i class="fas fa-code"></i> C</a>
+                            <a href="#"><i class="fas fa-code"></i> C#</a>
+                            <a href="#"><i class="fas fa-code"></i> R</a>
+                            <a href="#"><i class="fas fa-gem"></i> Ruby</a>
+                        </div>
+                    </div>
+                    <a href="#">Services</a>
+                    <a href="#">Solutions</a>
+                </div>
+            </li>
+            <li><a href="#">Home</a></li>
+
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1>Begin Your Coding Journey</h1>
+            <p>Master the art of programming with our comprehensive resources and interactive guides</p>
+            <button class="cta-button" onclick="scrollToLearningPaths()">Start Learning</button>
+        </section>
+
+        <section class="learning-paths" id="learning-paths">
+            <h2>Learning Paths</h2>
+            <div class="path-cards">
+                <div class="path-card" data-path="frontend">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Frontend Development</h3>
+                    <p>Create beautiful and interactive websites</p>
+                    <ul class="path-details">
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React/Vue/Angular</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                    <button class="explore-btn">Explore Path</button>
+                </div>
+
+                <div class="path-card" data-path="backend">
+                    <i class="fas fa-server"></i>
+                    <h3>Backend Development</h3>
+                    <p>Build powerful server-side applications</p>
+                    <ul class="path-details">
+                        <li>Python/Node.js/Java</li>
+                        <li>Databases (SQL/NoSQL)</li>
+                        <li>APIs & Microservices</li>
+                        <li>Server Management</li>
+                    </ul>
+                    <button class="explore-btn">Explore Path</button>
+                </div>
+
+                <div class="path-card" data-path="mobile">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Development</h3>
+                    <p>Create apps for iOS and Android</p>
+                    <ul class="path-details">
+                        <li>React Native</li>
+                        <li>Flutter</li>
+                        <li>Native iOS/Android</li>
+                        <li>App Publishing</li>
+                    </ul>
+                    <button class="explore-btn">Explore Path</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-section">
+            <h2>Interactive Learning Tools</h2>
+            <div class="tools-container">
+                <div class="code-playground">
+                    <h3>Interactive Code Playground</h3>
+                    <div class="editors-container">
+                        <div class="editor-panel">
+                            <div class="editor-header">
+                                <h4>HTML</h4>
+                                <button class="reset-btn" data-lang="html"><i class="fas fa-undo"></i></button>
+                            </div>
+                            <div class="editor" id="html-editor" contenteditable="true"></div>
+                        </div>
+                        <div class="editor-panel">
+                            <div class="editor-header">
+                                <h4>CSS</h4>
+                                <button class="reset-btn" data-lang="css"><i class="fas fa-undo"></i></button>
+                            </div>
+                            <div class="editor" id="css-editor" contenteditable="true"></div>
+                        </div>
+                        <div class="editor-panel">
+                            <div class="editor-header">
+                                <h4>JavaScript</h4>
+                                <button class="reset-btn" data-lang="js"><i class="fas fa-undo"></i></button>
+                            </div>
+                            <div class="editor" id="js-editor" contenteditable="true"></div>
+                        </div>
+                    </div>
+                    <div class="playground-controls">
+                        <button class="run-btn" onclick="runCode()"><i class="fas fa-play"></i> Run Code</button>
+                        <button class="save-btn" onclick="saveCode()"><i class="fas fa-save"></i> Save</button>
+                        <button class="share-btn" onclick="shareCode()"><i class="fas fa-share"></i> Share</button>
+                        <select id="template-select" onchange="loadTemplate()">
+                            <option value="">Select Template</option>
+                            <option value="button">Animated Button</option>
+                            <option value="card">Profile Card</option>
+                            <option value="gallery">Image Gallery</option>
+                            <option value="form">Contact Form</option>
+                        </select>
+                    </div>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <h4>Output</h4>
+                            <button class="toggle-console-btn" onclick="toggleConsole()">
+                                <i class="fas fa-terminal"></i> Toggle Console
+                            </button>
+                        </div>
+                        <div class="output-frame-container">
+                            <iframe id="output-frame" sandbox="allow-scripts"></iframe>
+                        </div>
+                        <div class="console-output" id="console-output">
+                            <div class="console-header">
+                                Console <button onclick="clearConsole()"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div id="console-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resources-section">
+            <h2>Learning Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <i class="fas fa-book"></i>
+                    <h3>Documentation</h3>
+                    <p>Comprehensive guides and references for all programming languages and frameworks.</p>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Video Tutorials</h3>
+                    <p>Step-by-step video tutorials from beginner to advanced levels.</p>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>Join our community of learners and get help from experienced developers.</p>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Practice Projects</h3>
+                    <p>Real-world projects to build your portfolio and gain practical experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <h2>Pro Tips for Beginners</h2>
+            <div class="tips-carousel" id="tips-carousel">
+                <div class="tip-card active">
+                    <h3>Start Small</h3>
+                    <p>Begin with the basics and gradually build up to more complex concepts. Rome wasn't built in a
+                        day!</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Practice Daily</h3>
+                    <p>Consistency is key. Even 30 minutes of coding practice each day can make a huge difference.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Build Projects</h3>
+                    <p>The best way to learn is by building real projects. Start with simple ones and progressively
+                        tackle harder challenges.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Debug Effectively</h3>
+                    <p>Learning to debug is crucial. Use console.log(), debugger tools, and read error messages
+                        carefully.</p>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="prev-btn" onclick="prevTip()"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn" onclick="nextTip()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </main>
+
+    <div class="content">
+        <h1>Welcome to CodeHub</h1>
+        <p>Explore our programming languages and start coding!</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
