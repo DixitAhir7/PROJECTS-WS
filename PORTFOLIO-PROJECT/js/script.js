@@ -1,4 +1,5 @@
 // Add smooth scrolling for navigation links
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -13,6 +14,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Add active state to navigation links based on scroll position
+
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
@@ -37,6 +39,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Mobile navigation toggle
+
 const createMobileNav = () => {
     const nav = document.querySelector('nav');
     const mobileMenuBtn = document.createElement('button');
@@ -54,9 +57,11 @@ const createMobileNav = () => {
 };
 
 // Initialize mobile navigation on load
+
 window.addEventListener('load', createMobileNav);
 
 // Add additional mobile styles dynamically
+
 const mobileStyles = `
     @media (max-width: 768px) {
         .mobile-menu-btn {
