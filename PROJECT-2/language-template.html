@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Information - CodeHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .language-info {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .language-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .language-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .resources-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resources-list li {
+            margin: 1rem 0;
+        }
+
+        .resources-list a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .resources-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-code"></i> CodeHub</a>
+        </div>
+    </nav>
+
+    <div class="language-info">
+        <div class="language-header">
+            <i class="language-icon" id="langIcon"></i>
+            <h1 id="langTitle"></h1>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h2>Overview</h2>
+                <p id="langDescription"></p>
+            </div>
+            <div class="info-card">
+                <h2>Key Features</h2>
+                <ul id="langFeatures"></ul>
+            </div>
+            <div class="info-card">
+                <h2>Learning Resources</h2>
+                <ul class="resources-list" id="langResources"></ul>
+            </div>
+            <div class="info-card">
+                <h2>Popular Use Cases</h2>
+                <ul id="langUseCases"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language data will be populated based on the URL parameter
+        const languageData = {
+            'html': {
+                icon: 'fab fa-html5',
+                title: 'HTML5',
+                description: 'HTML (HyperText Markup Language) is the standard markup language for creating web pages and web applications.',
+                features: [
+                    'Semantic Elements',
+                    'Multimedia Support',
+                    'Form Elements',
+                    'Canvas and SVG Support'
+                ],
+                resources: [
+                    { name: 'MDN Web Docs - HTML', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+                    { name: 'W3Schools HTML Tutorial', url: 'https://www.w3schools.com/html/' },
+                    { name: 'HTML.com', url: 'https://html.com/' }
+                ],
+                useCases: [
+                    'Web Pages',
+                    'Web Applications',
+                    'Email Templates',
+                    'Documentation'
+                ]
+            },
+            'css': {
+                icon: 'fab fa-css3-alt',
+                title: 'CSS3',
+                description: 'CSS (Cascading Style Sheets) is a style sheet language used for describing the presentation of a document written in HTML.',
+                features: [
+                    'Flexbox & Grid',
+                    'Animations',
+                    'Media Queries',
+                    'Custom Properties'
+                ],
+                resources: [
+                    { name: 'MDN Web Docs - CSS', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
+                    { name: 'CSS-Tricks', url: 'https://css-tricks.com/' },
+                    { name: 'W3Schools CSS Tutorial', url: 'https://www.w3schools.com/css/' }
+                ],
+                useCases: [
+                    'Web Design',
+                    'Responsive Layouts',
+                    'Animations',
+                    'Theme Customization'
+                ]
+            },
+            'javascript': {
+                icon: 'fab fa-js',
+                title: 'JavaScript',
+                description: 'JavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification.',
+                features: [
+                    'Asynchronous Programming',
+                    'DOM Manipulation',
+                    'Event Handling',
+                    'JSON Support'
+                ],
+                resources: [
+                    { name: 'MDN Web Docs - JavaScript', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+                    { name: 'JavaScript.info', url: 'https://javascript.info/' },
+                    { name: 'W3Schools JavaScript Tutorial', url: 'https://www.w3schools.com/js/' }
+                ],
+                useCases: [
+                    'Web Development',
+                    'Server-side Programming',
+                    'Mobile App Development',
+                    'Game Development'
+                ]
+            },
+            'python': {
+                icon: 'fab fa-python',
+                title: 'Python',
+                description: 'Python is an interpreted, high-level programming language known for its simplicity and readability.',
+                features: [
+                    'Simple Syntax',
+                    'Large Standard Library',
+                    'Dynamic Typing',
+                    'Object-Oriented'
+                ],
+                resources: [
+                    { name: 'Python.org', url: 'https://www.python.org/' },
+                    { name: 'Real Python', url: 'https://realpython.com/' },
+                    { name: 'W3Schools Python Tutorial', url: 'https://www.w3schools.com/python/' }
+                ],
+                useCases: [
+                    'Data Science',
+                    'Web Development',
+                    'AI & Machine Learning',
+                    'Automation'
+                ]
+            }
+        };
+
+        // Get the language from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const language = urlParams.get('lang') || 'html';
+
+        // Populate the page with language data
+        function populateLanguageInfo(lang) {
+            const data = languageData[lang];
+            if (!data) return;
+
+            document.getElementById('langIcon').className = `language-icon ${data.icon}`;
+            document.getElementById('langTitle').textContent = data.title;
+            document.getElementById('langDescription').textContent = data.description;
+
+            const featuresList = document.getElementById('langFeatures');
+            featuresList.innerHTML = data.features.map(feature => `<li>${feature}</li>`).join('');
+
+            const resourcesList = document.getElementById('langResources');
+            resourcesList.innerHTML = data.resources.map(resource =>
+                `<li><a href="${resource.url}" target="_blank">${resource.name}</a></li>`
+            ).join('');
+
+            const useCasesList = document.getElementById('langUseCases');
+            useCasesList.innerHTML = data.useCases.map(useCase => `<li>${useCase}</li>`).join('');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            populateLanguageInfo(language);
+        });
+    </script>
+</body>
+
+</html>

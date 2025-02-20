@@ -261,6 +261,104 @@ document.querySelectorAll('.stat').forEach(stat => {
     }
 };
 
+// Language information data
+const languageData = {
+    'html': {
+        icon: 'fab fa-html5',
+        title: 'HTML5',
+        description: 'HTML (HyperText Markup Language) is the standard markup language for creating web pages and web applications.',
+        features: [
+            'Semantic Elements',
+            'Multimedia Support',
+            'Form Elements',
+            'Canvas and SVG Support'
+        ],
+        resources: [
+            { name: 'MDN Web Docs - HTML', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+            { name: 'W3Schools HTML Tutorial', url: 'https://www.w3schools.com/html/' },
+            { name: 'HTML.com', url: 'https://html.com/' }
+        ],
+        useCases: [
+            'Web Pages',
+            'Web Applications',
+            'Email Templates',
+            'Documentation'
+        ]
+    },
+    'css': {
+        icon: 'fab fa-css3-alt',
+        title: 'CSS3',
+        description: 'CSS (Cascading Style Sheets) is a style sheet language used for describing the presentation of a document written in HTML.',
+        features: [
+            'Flexbox & Grid',
+            'Animations',
+            'Media Queries',
+            'Custom Properties'
+        ],
+        resources: [
+            { name: 'MDN Web Docs - CSS', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
+            { name: 'CSS-Tricks', url: 'https://css-tricks.com/' },
+            { name: 'W3Schools CSS Tutorial', url: 'https://www.w3schools.com/css/' }
+        ],
+        useCases: [
+            'Web Design',
+            'Responsive Layouts',
+            'Animations',
+            'Theme Customization'
+        ]
+    },
+    'javascript': {
+        icon: 'fab fa-js',
+        title: 'JavaScript',
+        description: 'JavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification.',
+        features: [
+            'Asynchronous Programming',
+            'DOM Manipulation',
+            'Event Handling',
+            'JSON Support'
+        ],
+        resources: [
+            { name: 'MDN Web Docs - JavaScript', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+            { name: 'JavaScript.info', url: 'https://javascript.info/' },
+            { name: 'W3Schools JavaScript Tutorial', url: 'https://www.w3schools.com/js/' }
+        ],
+        useCases: [
+            'Web Development',
+            'Server-side Programming',
+            'Mobile App Development',
+            'Game Development'
+        ]
+    },
+    'python': {
+        icon: 'fab fa-python',
+        title: 'Python',
+        description: 'Python is an interpreted, high-level programming language known for its simplicity and readability.',
+        features: [
+            'Simple Syntax',
+            'Large Standard Library',
+            'Dynamic Typing',
+            'Object-Oriented'
+        ],
+        resources: [
+            { name: 'Python.org', url: 'https://www.python.org/' },
+            { name: 'Real Python', url: 'https://realpython.com/' },
+            { name: 'W3Schools Python Tutorial', url: 'https://www.w3schools.com/python/' }
+        ],
+        useCases: [
+            'Data Science',
+            'Web Development',
+            'AI & Machine Learning',
+            'Automation'
+        ]
+    }
+};
+
+// Function to load language template
+function loadTemplate(lang) {
+    window.open(`language-template.html?lang=${lang}`, '_blank');
+    return false;
+}
+
 // Initialize editors with default code
 function initializeEditors() {
     htmlEditor.textContent = defaultCode.html;
@@ -556,4 +654,26 @@ function executeConsoleCode(code) {
 document.addEventListener('DOMContentLoaded', () => {
     consoleOutput.classList.add('show');
     consoleInput.addEventListener('keydown', handleConsoleInput);
+});
+
+// Handle explore path buttons and language links
+document.addEventListener('DOMContentLoaded', () => {
+    // Handle explore path buttons
+    document.querySelectorAll('.explore-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const path = btn.closest('.path-card').dataset.path;
+            window.open(`${path}.html`, '_blank');
+        });
+    });
+
+    // Handle language links
+    document.querySelectorAll('.nested-dropdown-content a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const lang = link.getAttribute('data-lang');
+            if (lang) {
+                window.open(`language-template.html?lang=${lang}`, '_blank');
+            }
+        });
+    });
 });

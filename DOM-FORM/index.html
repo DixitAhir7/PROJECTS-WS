@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form class="registration-form">
+            <div class="form-left">
+                <h2>General Information</h2>
+                <div class="form-group">
+                    <select name="title" id="title" required>
+                        <option value="" disabled selected>Title</option>
+                        <option value="">Mr.</option>
+                        <option value="">Mrs.</option>
+                        <option value="">Ms.</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lastName" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select name="position" id="position">
+                        <option value="">Position</option>
+                        <option value="manager">Manager</option>
+                        <option value="developer">Developer</option>
+                        <option value="designer">Designer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="company" placeholder="Company">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="businessArena" placeholder="Business Arena">
+                    </div>
+                    <div class="form-group">
+                        <select id="employees">
+                            <option value="">Employees</option>
+                            <option value="">1-10</option>
+                            <option value="">11-50</option>
+                            <option value="">51-200</option>
+                            <option value="">201+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-right">
+                <h2>Contact Details</h2>
+                <div class="form-group">
+                    <input type="text" id="street" placeholder="Street + Nr">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="additional" placeholder="Additional Information">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="zipCode" placeholder="Zip Code">
+                    </div>
+                    <div class="form-group">
+                        <select id="place">
+                            <option value="">Place</option>
+                            <option value="">City 1</option>
+                            <option value="">City 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select id="country">
+                        <option value="" disabled selected>Country</option>
+                        <option value="">USA</option>
+                        <option value="">UK</option>
+                        <option value="">Canada</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="code" placeholder="Code +">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Your Email">
+                </div>
+                <div class="form-group terms">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        I do accept the <a href="">Terms and Conditions</a> of your site.
+                    </label>
+                </div>
+                <button type="submit" class="register-btn">Register Badge</button>
+            </div>
+        </form>
+    </div>
+    <div class="for-color">
+        <input type="color">
+        <button onclick="changeColor()">changeColor</button>
+    </div>
+</body>
+
+</html>
