@@ -182,7 +182,6 @@ body {
     justify-content: center;
 }
 
-/* Media query for mobile devices */
 @media (max-width: 768px) {
     .sidebar {
         position: fixed;
